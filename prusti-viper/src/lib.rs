@@ -47,34 +47,22 @@ macro_rules! vir_expr {
     (( $($tokens: tt)+ )) => { vir_expr!($($tokens)+) }
 }
 
-pub type EncodingResult<T> = Result<T, ()>;
-
 pub struct Encoder<'v, 'tcx> {
     marker: std::marker::PhantomData<(&'v (), &'tcx ())>,
 }
 
-pub struct Aaaaaaaaaaaaaaaa<'tcx> {
-    marker: std::marker::PhantomData<(&'tcx (),)>,
-}
-
-pub struct Bbbbbbbbbbbbb<'tcx> {
-    marker: std::marker::PhantomData<(&'tcx (),)>,
-}
-
-impl<'tcx> Bbbbbbbbbbbbb<'tcx> {
-    pub fn encode(_: &Encoder<'_, 'tcx>, _: Ty<'tcx>) -> EncodingResult<Bbbbbbbbbbbbb<'tcx>> {
+impl<'tcx> Encoder<'tcx> {
+    pub fn encode(_: &Encoder<'_, 'tcx>, _: Ty<'tcx>) -> Result<Encoder<'tcx>, ()> {
         todo!()
     }
 }
 
-pub struct Ty<'tcx> {
-    marker: std::marker::PhantomData<(&'tcx (),)>,
-}
+pub struct Ty<'tcx>(std::marker::PhantomData<(&'tcx (),)>);
 
 pub fn build_spaghetti_domain<'v, 'tcx: 'v>(
     encoder: &Encoder<'v, 'tcx>, ty: Ty<'tcx>,
-) -> EncodingResult<()> {
-    let qweqweqweqqweq = Bbbbbbbbbbbbb::encode(encoder, ty)?;
+) -> Result<Encoder<'tcx>, ()> {
+    let qweqweqweqqweq = Encoder::encode(encoder, ty)?;
 //=======================================================
 
 //==========================================
