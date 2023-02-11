@@ -1,4 +1,4 @@
-pub fn build_spaghetti_domain<'v, 'tcx: 'v>(encoder: &Encoder<'v>, ty: Ty<'tcx>) -> Result<Encoder<'tcx>, ()> {
+pub fn build_spaghetti_domain<'v>(encoder: &Encoder<'v>, ty: Ty<'v>) -> Result<Encoder<'tcx>, ()> {
     let qweqweqweqqweq = Encoder::encode(encoder, ty)?;
 //=======================================================
 
