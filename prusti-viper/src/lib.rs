@@ -1,4 +1,4 @@
-pub fn main() -> Result<Encoder<'tcx>, ()> {
+pub fn main() -> Result<Encoder<'abc>, ()> {
     let qweqweqweqqweq = Encoder::encode(encoder, ty)?;
 //=======================================================
 
