@@ -21,7 +21,7 @@ pub mod vir {
             pub fn new(_: Vec<Expr>) { todo!() }
         }
     }
-    
+
     pub mod macros {
         pub mod polymorphic {
             #[macro_export]
@@ -37,19 +37,7 @@ pub mod vir {
                 ($antecedent: tt ==> $consequent: tt) => {
                     $crate::vir::polymorphic_vir::Expr::implies(vir_expr!($antecedent), vir_expr!($consequent))
                 };
-    
-                (forall $($name: ident : $type: tt),+ :: $({ $($triggers: tt),+ })+ :: $body: tt) => {
-                    $crate::vir::polymorphic_vir::Expr::forall(
-                        vec![$($crate::vir_local!($name: $type)),+],
-                        vec![
-                            $($crate::vir::polymorphic_vir::Trigger::new(vec![
-                                $(vir_expr!($triggers)),+
-                            ])),*
-                        ],
-                        vir_expr!($body),
-                    )
-                };
-    
+
                 (forall $([$vars: expr]),+ :: $({ $($triggers: tt),+ })+ :: $body: tt) => {
                     $crate::vir::polymorphic_vir::Expr::forall(
                         vec![$($vars.clone()),+],
@@ -61,7 +49,7 @@ pub mod vir {
                         vir_expr!($body),
                     )
                 };
-    
+
                 ([ $e: expr ]) => { $e.clone() };
     
                 (( $($tokens: tt)+ )) => { vir_expr!($($tokens)+) }
