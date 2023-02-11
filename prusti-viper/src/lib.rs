@@ -1,6 +1,4 @@
 mod vir {
-    pub struct DomainFunc;
-    pub struct Domain;
     #[derive(Clone)]
     pub struct LocalVar;
     pub struct Type;
@@ -50,8 +48,7 @@ macro_rules! vir_expr {
     (( $($tokens: tt)+ )) => { vir_expr!($($tokens)+) }
 }
 
-pub struct EncodingError;
-pub type EncodingResult<T> = Result<T, EncodingError>;
+pub type EncodingResult<T> = Result<T, ()>;
 
 pub struct Encoder<'v, 'tcx> {
     marker: std::marker::PhantomData<(&'v (), &'tcx ())>,
@@ -77,7 +74,7 @@ pub struct Ty<'tcx> {
 
 pub fn build_spaghetti_domain<'v, 'tcx: 'v>(
     encoder: &Encoder<'v, 'tcx>, ty: Ty<'tcx>,
-) -> EncodingResult<vir::Domain> {
+) -> EncodingResult<()> {
     let qweqweqweqqweq = Bbbbbbbbbbbbb::encode(encoder, ty)?;
 //=======================================================
 
