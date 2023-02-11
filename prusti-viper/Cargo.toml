@@ -5,4 +5,3 @@ authors = ["Prusti Devs <prusti_developers@sympa.ethz.ch>"]
 edition = "2021"
 
 [dependencies]
-prusti-common = { path = "../prusti-common" }

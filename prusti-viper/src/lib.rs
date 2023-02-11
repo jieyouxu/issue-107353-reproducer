@@ -1,3 +1,55 @@
+mod vir {
+    pub struct DomainFunc;
+    pub struct Domain;
+    #[derive(Clone)]
+    pub struct LocalVar;
+    pub struct Type;
+    #[derive(Clone)]
+    pub struct Expr;
+    pub struct Trigger;
+
+    impl Expr {
+        pub fn implies(left: Expr, right: Expr) -> Self { todo!() }
+        pub fn forall(_: Vec<LocalVar>, _: Vec<()>, _: Expr) -> Self { todo!() }
+        pub fn eq_cmp(left: Expr, right: Expr) -> Self { todo!() }
+        pub fn and(left: Expr, right: Expr) -> Self { todo!() }
+    }
+
+    impl Trigger {
+        pub fn new(_: Vec<Expr>) { todo!() }
+    }
+}
+
+macro_rules! vir_expr {
+    ($lhs: tt == $rhs: tt) => {
+        $crate::vir::Expr::eq_cmp(vir_expr!($lhs), vir_expr!($rhs))
+    };
+    
+    ($head: tt && $tail: tt) => {
+        $crate::vir::Expr::and(vir_expr!($head), vir_expr!($tail))
+    };
+
+    ($antecedent: tt ==> $consequent: tt) => {
+        $crate::vir::Expr::implies(vir_expr!($antecedent), vir_expr!($consequent))
+    };
+
+    (forall $([$vars: expr]),+ :: $({ $($triggers: tt),+ })+ :: $body: tt) => {
+        $crate::vir::Expr::forall(
+            vec![$($vars.clone()),+],
+            vec![
+                $($crate::vir::Trigger::new(vec![
+                    $(vir_expr!($triggers)),+
+                ])),*
+            ],
+            vir_expr!($body),
+        )
+    };
+
+    ([ $e: expr ]) => { $e.clone() };
+
+    (( $($tokens: tt)+ )) => { vir_expr!($($tokens)+) }
+}
+
 pub struct EncodingError;
 pub type EncodingResult<T> = Result<T, EncodingError>;
 
@@ -19,15 +71,12 @@ impl<'tcx> Bbbbbbbbbbbbb<'tcx> {
     }
 }
 
-pub use prusti_common::vir::polymorphic_vir as vir;
-
 pub mod ty {
     pub struct Ty<'tcx> {
         marker: std::marker::PhantomData<(&'tcx (),)>,
     }
 }
 
-pub use prusti_common::vir_expr;
 
 
 pub enum SpaghettiKind {}
