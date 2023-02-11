@@ -66,25 +66,20 @@ pub struct Bbbbbbbbbbbbb<'tcx> {
 }
 
 impl<'tcx> Bbbbbbbbbbbbb<'tcx> {
-    pub fn encode(_: &Encoder<'_, 'tcx>, _: ty::Ty<'tcx>) -> EncodingResult<Bbbbbbbbbbbbb<'tcx>> {
+    pub fn encode(_: &Encoder<'_, 'tcx>, _: Ty<'tcx>) -> EncodingResult<Bbbbbbbbbbbbb<'tcx>> {
         todo!()
     }
 }
 
-pub mod ty {
-    pub struct Ty<'tcx> {
-        marker: std::marker::PhantomData<(&'tcx (),)>,
-    }
+pub struct Ty<'tcx> {
+    marker: std::marker::PhantomData<(&'tcx (),)>,
 }
-
-
 
 pub enum SpaghettiKind {}
 
 pub fn build_spaghetti_domain<'v, 'tcx: 'v>(
-    encoder: &Encoder<'v, 'tcx>, ty: ty::Ty<'tcx>,
+    encoder: &Encoder<'v, 'tcx>, ty: Ty<'tcx>,
 ) -> EncodingResult<vir::Domain> {
-
     let qweqweqweqqweq = Bbbbbbbbbbbbb::encode(encoder, ty)?;
 //=======================================================
 
