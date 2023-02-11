@@ -75,8 +75,6 @@ pub struct Ty<'tcx> {
     marker: std::marker::PhantomData<(&'tcx (),)>,
 }
 
-pub enum SpaghettiKind {}
-
 pub fn build_spaghetti_domain<'v, 'tcx: 'v>(
     encoder: &Encoder<'v, 'tcx>, ty: Ty<'tcx>,
 ) -> EncodingResult<vir::Domain> {
