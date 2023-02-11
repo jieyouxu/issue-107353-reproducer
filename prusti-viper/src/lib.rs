@@ -1,7 +1,6 @@
 mod vir {
     #[derive(Clone)]
     pub struct LocalVar;
-    pub struct Type;
     #[derive(Clone)]
     pub struct Expr;
     pub struct Trigger;
