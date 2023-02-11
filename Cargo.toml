@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "prusti-common",
+    "prusti-viper",
+]
